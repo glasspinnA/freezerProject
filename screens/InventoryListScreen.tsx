@@ -1,12 +1,14 @@
 import * as React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Component } from "react";
 import CustomListView from "./../components/CustomListView";
 import ProductItemDTO from "./../ProductItemDTO";
 
 export interface InventoryListScreenProps {}
 
-export interface InventoryListScreenState {}
+export interface InventoryListScreenState {
+  data: ProductItemDTO[];
+}
 
 class InventoryListScreen extends Component<
   InventoryListScreenProps,
@@ -14,188 +16,41 @@ class InventoryListScreen extends Component<
 > {
   constructor(props: InventoryListScreenProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      data: [
+        {
+          id: 1,
+          productName: "Isaac newton",
+          isProductOpen: true,
+          expiryDate: "2020-03-02",
+          amount: 3,
+          amountType: "st"
+        },
+        {
+          id: 2,
+          productName: "Ägg",
+          isProductOpen: true,
+          expiryDate: "2020-03-02",
+          amount: 3,
+          amountType: "st"
+        }
+      ]
+    };
   }
 
-  getData(): ProductItemDTO[] {
-    return [
-      {
-        id: 2,
-        productName: "Isaac newton",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Ägg",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Kalkon",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Skinka",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      },
-      {
-        id: 2,
-        productName: "Potatis",
-        isProductOpen: true,
-        expiryDate: "2020-03-02",
-        amount: 3,
-        amountType: "st"
-      }
-    ];
-  }
+  deleteItemRow = (id: number) => {
+    this.setState({
+      data: this.state.data.filter(item => item.id !== id)
+    });
+  };
 
   public render() {
     return (
       <View style={styles.container}>
         <CustomListView
-          itemList={this.getData()}
+          itemList={this.state.data}
           isShopingList={false}
+          deleteItemRowCallback={this.deleteItemRow}
         ></CustomListView>
       </View>
     );
