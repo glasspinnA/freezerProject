@@ -1,6 +1,8 @@
 export default interface ProductItemDTO {
     productName: string;
-    numberItems: string;
-    imageUrl: string;
+    amount: number;
+    amountType: string
+    isProductOpen: boolean,
+    expiryDate: string
     id: number;
 }
